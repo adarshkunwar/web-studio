@@ -13,25 +13,33 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import axios from "../axios/axios";
 
 const formSchema = z.object({
-  name_3925930145: z.string(),
-  name_3212498702: z.string(),
+  email: z.string(),
+  password: z.string(),
 });
 
-export default function MyForm() {
+export default function LoginInForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      console.log(values);
-      toast(
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>,
-      );
+      axios
+        .post("/api/v1/en/user/login", values)
+        .then(() => {
+          toast.success("User is Logged in");
+        })
+        .catch(() => {
+          toast.error("Failed to submit the form. Please try again.");
+        });
+      // toast(
+      //   <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+      //     <code className="text-white">{JSON.stringify(values, null, 2)}</code>
+      //   </pre>,
+      // );
     } catch (error) {
       console.error("Form submission error", error);
       toast.error("Failed to submit the form. Please try again.");
@@ -46,12 +54,12 @@ export default function MyForm() {
       >
         <FormField
           control={form.control}
-          name="name_3925930145"
+          name="email"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" type="" {...field} />
+                <Input placeholder="Enter your email" type="" {...field} />
               </FormControl>
               <FormDescription>
                 This is your public display name.
@@ -63,7 +71,7 @@ export default function MyForm() {
 
         <FormField
           control={form.control}
-          name="name_3212498702"
+          name="password"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Password</FormLabel>

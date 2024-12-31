@@ -1,5 +1,5 @@
 import LoginInForm from "../components/pageComponents/LogInForm";
-const Login = () => {
+const SignUp = () => {
   return (
     <div className="flex flex-col justify-center items-center h-screen">
       <div className="w-96 border px-5 py-1">
@@ -9,4 +9,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
