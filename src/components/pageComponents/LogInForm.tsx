@@ -1,6 +1,5 @@
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,35 +13,43 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import axios from "../axios/axios";
+import { zodResolver } from "@hookform/resolvers/zod";
 
+// Define a more robust validation schema
 const formSchema = z.object({
-  email: z.string(),
-  password: z.string(),
+  email: z
+    .string()
+    .min(1, "Email is required")
+    .email("Please enter a valid email address"),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .max(100, "Password is too long"),
 });
 
-export default function LoginInForm() {
+export default function LoginForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      axios
+      await axios
         .post("/api/v1/en/user/login", values)
         .then(() => {
-          toast.success("User is Logged in");
+          localStorage.setItem("token", "token");
+          toast.success("Successfully logged in");
+          window.location.href = "/";
         })
         .catch(() => {
-          toast.error("Failed to submit the form. Please try again.");
+          toast.error("login/ password was wrong");
         });
-      // toast(
-      //   <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-      //     <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-      //   </pre>,
-      // );
     } catch (error) {
-      console.error("Form submission error", error);
-      toast.error("Failed to submit the form. Please try again.");
+      console.error("Login error:", error);
     }
   }
 
@@ -50,19 +57,24 @@ export default function LoginInForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 max-w-3xl mx-auto py-10"
+        className="space-y-6 max-w-md mx-auto py-8"
       >
         <FormField
           control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your email" type="" {...field} />
+                <Input
+                  placeholder="Enter your email"
+                  type="email"
+                  autoComplete="email"
+                  {...field}
+                />
               </FormControl>
               <FormDescription>
-                This is your public display name.
+                Please enter your registered email address
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -76,15 +88,26 @@ export default function LoginInForm() {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="Placeholder" {...field} type="password" />
+                <Input
+                  placeholder="Enter your password"
+                  type="password"
+                  autoComplete="current-password"
+                  {...field}
+                />
               </FormControl>
-              <FormDescription>Enter your password.</FormDescription>
+              <FormDescription>Enter your account password</FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <Button
+          type="submit"
+          className="w-full"
+          disabled={form.formState.isSubmitting}
+        >
+          {form.formState.isSubmitting ? "Logging in..." : "Log in"}
+        </Button>
       </form>
     </Form>
   );
