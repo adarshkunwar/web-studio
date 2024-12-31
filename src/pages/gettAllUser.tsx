@@ -1,7 +1,9 @@
+import UserDataTable from "@/components/pageComponents/getAllDataTable";
+
 const GetAllUser = () => {
   return (
     <div>
-      <h1>Get All User</h1>
+      <UserDataTable />
     </div>
   );
 };

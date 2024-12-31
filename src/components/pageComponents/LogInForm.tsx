@@ -42,8 +42,8 @@ export default function LoginForm() {
     try {
       await axios
         .post("/api/v1/en/user/login", values)
-        .then(() => {
-          localStorage.setItem("token", "token");
+        .then((res) => {
+          localStorage.setItem("token", res.data.token);
           toast.success("Successfully logged in");
           navigate("/");
         })
