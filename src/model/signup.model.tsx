@@ -198,7 +198,7 @@ export const registerFormField: TFormSection<TRegisterFormSchema>[] = [
       {
         label: "Academic Year",
         name: "academicYear",
-        type: EInputType.TEXT,
+        type: EInputType.DATE,
         placeholder: "Enter academic year",
         required: false,
         grid: 1,

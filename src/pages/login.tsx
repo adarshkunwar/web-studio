@@ -5,6 +5,12 @@ const Login = () => {
       <div className="w-96 border px-5 py-1">
         <LoginInForm />
       </div>
+      <p className="text-sm">
+        Don't have an account?
+        <a href="/signUp" className="text-blue-500">
+          Sign Up
+        </a>
+      </p>
     </div>
   );
 };

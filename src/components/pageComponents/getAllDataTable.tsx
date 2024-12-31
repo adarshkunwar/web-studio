@@ -20,19 +20,7 @@ import { ArrowUpDown, UserCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import axios from "../axios/axios";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-
-interface UserData {
-  id: string;
-  institutionId: string;
-  name: string;
-  email: string;
-  phone: number;
-  languageKnown: string;
-  status: string;
-  createdAt: string;
-  createdBy: string;
-  isArchived: string;
-}
+import { UserData } from "@/types/datea";
 
 const UserDataTable = () => {
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -154,6 +142,10 @@ const UserDataTable = () => {
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         );
+      },
+      cell: ({ row }) => {
+        const date = row.getValue("createdAt");
+        return new Date(date as Date).toLocaleDateString();
       },
     },
     {

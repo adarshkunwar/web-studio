@@ -130,8 +130,13 @@ const UserRegistration = () => {
                 </div>
               );
             })}
-            <div className="sm:col-span-2 flex justify-center">
-              <Button type="submit" variant="default" disabled={loading}>
+            <div className="w-full my-5 flex justify-end ">
+              <Button
+                type="submit"
+                variant="default"
+                disabled={loading}
+                className="px-20 bg-green-700"
+              >
                 {loading ? "loaidng..." : "Register"}
               </Button>
             </div>
