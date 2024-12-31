@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SignUp from "./pages/signUp";
 import Login from "./pages/login";
 import GetAllUser from "./pages/gettAllUser";
+import ProtectedRoute from "./components/protectedRoute";
 
 const Router = () => {
   return (
@@ -9,7 +10,14 @@ const Router = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/" element={<GetAllUser />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <GetAllUser />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
