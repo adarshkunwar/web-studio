@@ -1,9 +1,9 @@
-import LoginInForm from "../components/pageComponents/LogInForm";
+import SignupForm from "@/components/pageComponents/SignUpForm";
 const SignUp = () => {
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
-      <div className="w-96 border px-5 py-1">
-        <LoginInForm />
+    <div className="h-screen">
+      <div className="border px-5 py-1">
+        <SignupForm />
       </div>
     </div>
   );
