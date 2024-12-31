@@ -71,49 +71,63 @@ const UserRegistration = () => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="w-full  grid grid-cols-1 sm:grid-cols-4 gap-4 mx-auto py-4"
           >
-            {registerFormField.map((formField) => (
-              <FormField
-                key={formField.name}
-                control={form.control}
-                name={formField.name}
-                render={({ field }) => (
-                  <FormItem
-                    className={`${formField.grid === 1 ? "col-span-1" : formField.grid === 2 ? "col-span-2" : formField.grid === 3 ? "col-span-3" : "col-span-4"} `}
-                  >
-                    <FormLabel className="capitalize">
-                      {formField.label}
-                    </FormLabel>
-                    <FormControl>
-                      {formField.type === "select" ? (
-                        <select
-                          {...field}
-                          required={formField.required}
-                          className="border rounded px-2 py-1 w-full focus:outline-none"
-                        >
-                          <option value="" disabled>
-                            Select {formField.label.toLowerCase()}
-                          </option>
-                          {formField.option?.map((option) => (
-                            <option key={option.value} value={option.value}>
-                              {option.label}
-                            </option>
-                          ))}
-                        </select>
-                      ) : (
-                        <Input
-                          placeholder={formField.placeholder}
-                          required={formField.required}
-                          type={formField.type}
-                          {...field}
-                          className="focus:outline-none"
-                        />
-                      )}
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            ))}
+            {registerFormField.map((field) => {
+              return (
+                <div>
+                  <div className="bg-black text-white py-2 px-5 text-2xl">
+                    {field.title}
+                  </div>
+                  {field.fields.map((formField) => {
+                    return (
+                      <FormField
+                        key={formField.name}
+                        control={form.control}
+                        name={formField.name}
+                        render={({ field }) => (
+                          <FormItem
+                            className={`${formField.grid === 1 ? "col-span-1" : formField.grid === 2 ? "col-span-2" : formField.grid === 3 ? "col-span-3" : "col-span-4"} `}
+                          >
+                            <FormLabel className="capitalize">
+                              {formField.label}
+                            </FormLabel>
+                            <FormControl>
+                              {formField.type === "select" ? (
+                                <select
+                                  {...field}
+                                  required={formField.required}
+                                  className="border rounded px-2 py-1 w-full focus:outline-none"
+                                >
+                                  <option value="" disabled>
+                                    Select {formField.label.toLowerCase()}
+                                  </option>
+                                  {formField.option?.map((option) => (
+                                    <option
+                                      key={option.value}
+                                      value={option.value}
+                                    >
+                                      {option.label}
+                                    </option>
+                                  ))}
+                                </select>
+                              ) : (
+                                <Input
+                                  placeholder={formField.placeholder}
+                                  required={formField.required}
+                                  type={formField.type}
+                                  {...field}
+                                  className="focus:outline-none"
+                                />
+                              )}
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    );
+                  })}
+                </div>
+              );
+            })}
             <div className="sm:col-span-2 flex justify-center">
               <Button type="submit" variant="default" disabled={loading}>
                 {loading ? "loaidng..." : "Register"}

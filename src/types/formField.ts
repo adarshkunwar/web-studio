@@ -21,6 +21,11 @@ type TInputType =
   | "tel"
   | "number";
 
+export type TFormSection<T> = {
+  title: string;
+  fields: TFormField<T>[];
+};
+
 export type TFormField<T> = (
   | {
       type: TInputType;
