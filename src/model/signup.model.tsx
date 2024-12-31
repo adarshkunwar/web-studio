@@ -16,6 +16,7 @@ export const registerFormSchema = z.object({
   taddress: z.string({ required_error: "enter your temporary address" }),
   bloodGroup: z.string(),
   religion: z.string(),
+  gender: z.string(),
   motherTongue: z.string(),
   admissionNo: z.string(),
   regdNo: z.string(),
@@ -36,32 +37,33 @@ export const registerFormSchema = z.object({
 
 export type TRegisterFormSchema = z.infer<typeof registerFormSchema>;
 export const registerFormDefaultValue: Partial<TRegisterFormSchema> = {
-  name: "adarsh",
-  email: "a@gmail.com",
-  password: "adadadsfasdfa",
-  role: "ads",
-  dob: "2024-12-18",
-  phone: "1231231231",
-  paddress: "sdf",
-  taddress: "adsf",
-  bloodGroup: "ad",
-  religion: "adf",
-  motherTongue: "adf",
-  admissionNo: "adf",
-  regdNo: "adf",
-  academicYear: "adsf",
-  joiningDate: "0021-02-11",
-  expectedPassoutDate: "0012-12-21",
-  studentType: "12",
-  rollNo: "12",
-  libraryId: "12",
-  panNo: "12",
-  staffId: "1221",
-  staffType: "12",
-  licenseNo: "12",
-  citizenshipId: "12",
-  designation: "21",
-  payrollType: "21",
+  name: "",
+  email: "",
+  password: "",
+  role: "",
+  dob: "",
+  phone: "",
+  paddress: "",
+  taddress: "",
+  bloodGroup: "",
+  religion: "",
+  motherTongue: "",
+  gender: "",
+  admissionNo: "",
+  regdNo: "",
+  academicYear: "",
+  joiningDate: "",
+  expectedPassoutDate: "",
+  studentType: "",
+  rollNo: "",
+  libraryId: "",
+  panNo: "",
+  staffId: "",
+  staffType: "",
+  licenseNo: "",
+  citizenshipId: "",
+  designation: "",
+  payrollType: "",
 };
 
 export const registerFormField: TFormField<TRegisterFormSchema>[] = [
@@ -71,6 +73,19 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.TEXT,
     placeholder: "Enter your name",
     required: true,
+    grid: 4,
+  },
+  {
+    label: "Gender",
+    name: "gender",
+    type: EInputType.SELECT,
+    placeholder: "Enter your gender",
+    required: true,
+    grid: 1,
+    option: [
+      { value: "MALE", label: "male" },
+      { value: "FEMALE", label: "female" },
+    ],
   },
   {
     label: "Email",
@@ -78,6 +93,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.EMAIL,
     placeholder: "Enter your email",
     required: true,
+    grid: 2,
   },
   {
     label: "Password",
@@ -85,13 +101,19 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.PASSWORD,
     placeholder: "Enter your password",
     required: true,
+    grid: 1,
   },
   {
     label: "Role",
     name: "role",
-    type: EInputType.TEXT,
+    type: EInputType.SELECT,
     placeholder: "Enter your role",
     required: true,
+    grid: 1,
+    option: [
+      { value: "STUDENT", label: "Student" },
+      { value: "PARENT", label: "guardian" },
+    ],
   },
   {
     label: "Date of Birth",
@@ -99,6 +121,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.DATE,
     placeholder: "YYYY-MM-DD",
     required: true,
+    grid: 2,
   },
   {
     label: "Phone",
@@ -106,6 +129,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.TEL,
     placeholder: "Enter your phone number",
     required: true,
+    grid: 1,
   },
   {
     label: "Permanent Address",
@@ -113,6 +137,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.TEXT,
     placeholder: "Enter your permanent address",
     required: true,
+    grid: 2,
   },
   {
     label: "Temporary Address",
@@ -120,6 +145,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.TEXT,
     placeholder: "Enter your temporary address",
     required: true,
+    grid: 2,
   },
   {
     label: "Blood Group",
@@ -127,6 +153,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.TEXT,
     placeholder: "Enter your blood group",
     required: false,
+    grid: 1,
   },
   {
     label: "Religion",
@@ -134,6 +161,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.TEXT,
     placeholder: "Enter your religion",
     required: false,
+    grid: 2,
   },
   {
     label: "Mother Tongue",
@@ -141,6 +169,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.TEXT,
     placeholder: "Enter your mother tongue",
     required: false,
+    grid: 1,
   },
   {
     label: "Admission No",
@@ -148,6 +177,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.TEXT,
     placeholder: "Enter admission number",
     required: false,
+    grid: 1,
   },
   {
     label: "Registration No",
@@ -155,6 +185,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.TEXT,
     placeholder: "Enter registration number",
     required: false,
+    grid: 1,
   },
   {
     label: "Academic Year",
@@ -162,6 +193,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.TEXT,
     placeholder: "Enter academic year",
     required: false,
+    grid: 1,
   },
   {
     label: "Joining Date",
@@ -169,6 +201,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.DATE,
     placeholder: "YYYY-MM-DD",
     required: false,
+    grid: 1,
   },
   {
     label: "Expected Passout Date",
@@ -176,6 +209,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.DATE,
     placeholder: "YYYY-MM-DD",
     required: false,
+    grid: 1,
   },
   {
     label: "Student Type",
@@ -183,6 +217,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.TEXT,
     placeholder: "Enter student type",
     required: false,
+    grid: 1,
   },
   {
     label: "Roll No",
@@ -190,6 +225,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.TEXT,
     placeholder: "Enter roll number",
     required: false,
+    grid: 1,
   },
   {
     label: "Library ID",
@@ -197,6 +233,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.TEXT,
     placeholder: "Enter library ID",
     required: false,
+    grid: 1,
   },
   {
     label: "PAN No",
@@ -204,6 +241,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.TEXT,
     placeholder: "Enter PAN number",
     required: false,
+    grid: 1,
   },
   {
     label: "Staff ID",
@@ -211,6 +249,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.TEXT,
     placeholder: "Enter staff ID",
     required: false,
+    grid: 1,
   },
   {
     label: "Staff Type",
@@ -218,6 +257,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.TEXT,
     placeholder: "Enter staff type",
     required: false,
+    grid: 1,
   },
   {
     label: "License No",
@@ -225,6 +265,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.TEXT,
     placeholder: "Enter license number",
     required: false,
+    grid: 1,
   },
   {
     label: "Citizenship ID",
@@ -232,6 +273,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.TEXT,
     placeholder: "Enter citizenship ID",
     required: false,
+    grid: 1,
   },
   {
     label: "Designation",
@@ -239,6 +281,7 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.TEXT,
     placeholder: "Enter designation",
     required: false,
+    grid: 1,
   },
   {
     label: "Payroll Type",
@@ -246,5 +289,6 @@ export const registerFormField: TFormField<TRegisterFormSchema>[] = [
     type: EInputType.TEXT,
     placeholder: "Enter payroll type",
     required: false,
+    grid: 1,
   },
 ];

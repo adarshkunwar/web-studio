@@ -18,6 +18,7 @@ type TInputType =
   | "file"
   | "checkbox"
   | "date"
+  | "tel"
   | "number";
 
 export type TFormField<T> = (
@@ -33,6 +34,7 @@ export type TFormField<T> = (
     }
 ) & {
   required: boolean;
+  grid: 1 | 2 | 3 | 4;
   label: string;
   placeholder?: string;
   name: keyof T;
