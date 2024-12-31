@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import axios from "../axios/axios";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
 
 // Define a more robust validation schema
 const formSchema = z.object({
@@ -28,6 +29,7 @@ const formSchema = z.object({
 });
 
 export default function LoginForm() {
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,7 +45,7 @@ export default function LoginForm() {
         .then(() => {
           localStorage.setItem("token", "token");
           toast.success("Successfully logged in");
-          window.location.href = "/";
+          navigate("/");
         })
         .catch(() => {
           toast.error("login/ password was wrong");
