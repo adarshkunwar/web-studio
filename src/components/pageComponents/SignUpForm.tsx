@@ -69,62 +69,64 @@ const UserRegistration = () => {
           </h2>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="w-full  grid grid-cols-1 sm:grid-cols-4 gap-4 mx-auto py-4"
+            className="w-full   mx-auto py-4"
           >
             {registerFormField.map((field) => {
               return (
                 <div>
-                  <div className="bg-black text-white py-2 px-5 text-2xl">
+                  <div className="bg-black text-white py-2 px-5 text-2xl my-5">
                     {field.title}
                   </div>
-                  {field.fields.map((formField) => {
-                    return (
-                      <FormField
-                        key={formField.name}
-                        control={form.control}
-                        name={formField.name}
-                        render={({ field }) => (
-                          <FormItem
-                            className={`${formField.grid === 1 ? "col-span-1" : formField.grid === 2 ? "col-span-2" : formField.grid === 3 ? "col-span-3" : "col-span-4"} `}
-                          >
-                            <FormLabel className="capitalize">
-                              {formField.label}
-                            </FormLabel>
-                            <FormControl>
-                              {formField.type === "select" ? (
-                                <select
-                                  {...field}
-                                  required={formField.required}
-                                  className="border rounded px-2 py-1 w-full focus:outline-none"
-                                >
-                                  <option value="" disabled>
-                                    Select {formField.label.toLowerCase()}
-                                  </option>
-                                  {formField.option?.map((option) => (
-                                    <option
-                                      key={option.value}
-                                      value={option.value}
-                                    >
-                                      {option.label}
+                  <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                    {field.fields.map((formField) => {
+                      return (
+                        <FormField
+                          key={formField.name}
+                          control={form.control}
+                          name={formField.name}
+                          render={({ field }) => (
+                            <FormItem
+                              className={`${formField.grid === 1 ? "col-span-1" : formField.grid === 2 ? "col-span-2" : formField.grid === 3 ? "col-span-3" : "col-span-4"} `}
+                            >
+                              <FormLabel className="capitalize">
+                                {formField.label}
+                              </FormLabel>
+                              <FormControl>
+                                {formField.type === "select" ? (
+                                  <select
+                                    {...field}
+                                    required={formField.required}
+                                    className="border rounded px-2 py-1 w-full focus:outline-none"
+                                  >
+                                    <option value="" disabled>
+                                      Select {formField.label.toLowerCase()}
                                     </option>
-                                  ))}
-                                </select>
-                              ) : (
-                                <Input
-                                  placeholder={formField.placeholder}
-                                  required={formField.required}
-                                  type={formField.type}
-                                  {...field}
-                                  className="focus:outline-none"
-                                />
-                              )}
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    );
-                  })}
+                                    {formField.option?.map((option) => (
+                                      <option
+                                        key={option.value}
+                                        value={option.value}
+                                      >
+                                        {option.label}
+                                      </option>
+                                    ))}
+                                  </select>
+                                ) : (
+                                  <Input
+                                    placeholder={formField.placeholder}
+                                    required={formField.required}
+                                    type={formField.type}
+                                    {...field}
+                                    className="focus:outline-none"
+                                  />
+                                )}
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      );
+                    })}
+                  </div>
                 </div>
               );
             })}
