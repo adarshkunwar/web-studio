@@ -176,7 +176,19 @@ const UserDataTable = () => {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>User Profile Details</CardTitle>
+        <div className="flex justify-between">
+          <CardTitle>User Profile Details</CardTitle>
+
+          <button
+            className="bg-red-500 text-white px-2 py-1"
+            onClick={() => {
+              localStorage.removeItem("token");
+              window.location.href = "/login";
+            }}
+          >
+            logout
+          </button>
+        </div>
       </CardHeader>
       <CardContent>
         <div className="rounded-md border">
@@ -230,7 +242,7 @@ const UserDataTable = () => {
           </Table>
         </div>
       </CardContent>
-      <div className="flex gap-4">
+      <div className="flex gap-4 mb-10 justify-end px-8">
         <button
           className="bg-blue-500 text-white px-5 py-1 rounded-md"
           onClick={() => {
